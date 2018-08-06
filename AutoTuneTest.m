@@ -8,7 +8,7 @@ seg = segment(y,44100/50);
 prevFreq = 440;
 for (i = 1:length(seg(:,1)))
 	% Extract Original Frequency Contour
-	freqContour(i)   = getFrequency(seg(i,:),prevFreq);
+	freqContour(i)   = getFrequencyZCM(seg(i,:),prevFreq);
 	prevFreq = freqContour(i);
 
 	% Snap to wanted Contour

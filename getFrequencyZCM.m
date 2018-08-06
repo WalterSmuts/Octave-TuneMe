@@ -1,4 +1,4 @@
-function freq = getFrequency(signal, prevFreq)
+function freq = getFrequencyZCM(signal, prevFreq)
 	sum = 0;
 	firstIndex = 0;
 	lastIndex  = 0;
