@@ -1,4 +1,4 @@
-function D = stft(x, f, w, h, sr)
+function [D DD] = stft(x, f, w, h, sr)
 % D = stft(X, F, W, H, SR)                       Short-time Fourier transform.
 %	Returns some frames of short-term Fourier transform of x.  Each 
 %	column of the result is one F-point fft (default 256); each
@@ -57,7 +57,9 @@ d = zeros((1+f/2),1+fix((s-f)/h));
 for b = 0:h:(s-f)
   u = win.*x((b+1):(b+f));
   t = fft(u);
+  tt = fft([u zeros(1,2048*2*2*2)]);
   d(:,c) = t(1:(1+f/2))';
+  dd(:,c) = tt(1:(1+f/2))';
   c = c+1;
 end;
 
@@ -73,4 +75,7 @@ if nargout == 0
 else
   % Otherwise, no plot, but return STFT
   D = d;
+  if nargout > 1
+    DD = dd;
+  endif;
 end

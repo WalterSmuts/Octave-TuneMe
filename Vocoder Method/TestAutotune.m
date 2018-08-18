@@ -10,11 +10,12 @@ hop = windowSize/4;
 ratio = 2;
 
 % Convert to stft
-spec = stft(x',windowSize,windowSize,hop);
+[spec specRes] = stft(x',windowSize,windowSize,hop);
 original = columns(spec)-2;
 
 % Get shift ratio from stft
-freqContour = getFrequencyContourSTFT(spec,sf,windowSize);
+freqContour = getFrequencyContourSTFT(specRes,sf,windowSize+2048*2*2*2);
+stem(freqContour);
 wantedContour = getClosestFreqContour(freqContour);
 shiftRatio = wantedContour./freqContour;
 
