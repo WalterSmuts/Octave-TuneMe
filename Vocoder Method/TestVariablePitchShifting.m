@@ -2,7 +2,7 @@ pkg load signal;
 addpath("lib/");
 
 % Variable initialization
-[x sf] = audioread("testData.wav");
+[x sf] = audioread("counting.wav");
 windowSize = 1024;
 hop = windowSize/4;
 ratio = 2;
