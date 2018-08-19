@@ -18,18 +18,16 @@ wantedContour = getClosestFreqContour(freqContour);
 shiftRatio = wantedContour./freqContour;
 shiftRatio = ones(1,length(shiftRatio))*0.8;
 
-% Sample at arbitrary variable intervals
-samplePoints = 1:columns(spec)-1; % -1 because needs n+1 to interpolate
-samplePoints = samplePoints.^2/(samplePoints(end));
+% Get Sampling Points
+[samplePointsSTFT samplePointsX]  = getSamplePoints(shiftRatio,windowSize); % CHECK n-1!!!
 
-% Actually apply arbitrary re-sampling
+% Actually apply arbitrary re-sampling of STFT
 newSpec = pvsample(spec,samplePoints,hop);
+
+% Get the time stretched signal x
 stretchedX = istft(newSpec,windowSize,windowSize,hop);
 
 % Interpolate to pitch shifted sample by arbitrary function
-tCompress = 1:length(stretchedX);
-tCompress = sqrt(tCompress);
-tCompress = tCompress .* tCompress(end);
 autoTunedX = interp1(stretchedX, [tCompress], 'spline');
 
 % Draw sampling density function
@@ -37,7 +35,7 @@ subplot(2,1,1);
 stem(shiftRatio);
 % Draw Sample point
 subplot(2,1,2);
-scatter(samplePoints,zeros(1,length(samplePoints)))
+scatter(samplePointsSTFT,zeros(1,length(samplePointsSTFT)))
 
 % Play
 soundsc(x,sf);
