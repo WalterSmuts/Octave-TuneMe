@@ -20,14 +20,14 @@ t = (t.^2)./original;
 
 % Actually apply re-sampling
 newSpec = pvsample(spec,t,hop);
-strechedSpec = istft(newSpec,windowSize,windowSize,hop);
+stretchedX = istft(newSpec,windowSize,windowSize,hop);
 
 % Interpolate to pitch shifted sample
-tCompress = 1:length(strechedSpec);
+tCompress = 1:length(stretchedX);
 tCompress = sqrt(tCompress);
 tCompress = tCompress .* tCompress(end);
-%tCompress = length(strechedSpec) - flip((tCompress.^2)/length(strechedSpec));
-pitchShiftedX = interp1(strechedSpec, [tCompress], 'spline');
+%tCompress = length(stretchedX) - flip((tCompress.^2)/length(stretchedX));
+pitchShiftedX = interp1(stretchedX, [tCompress], 'spline');
 
 % Play Slowed Down sample
 soundsc(pitchShiftedX,sf);
