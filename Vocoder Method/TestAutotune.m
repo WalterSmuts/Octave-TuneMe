@@ -5,7 +5,7 @@ addpath("lib/");
 sf = 44100;
 t = 0:1/sf:2;
 % x = sin(2*pi*440*t + 440*t.^2);
-x = audioread("counting.wav");
+x = audioread("ahhh.wav");
 windowSize = 1024;
 hop = windowSize/4;
 ratio = 2;
@@ -13,11 +13,17 @@ ratio = 2;
 % Convert to stft
 spec = stft(x',windowSize,windowSize,hop);
 
-% Get shift ratio from stft
-freqContour = getFrequencyContourSTFT(spec,sf,windowSize);
+% Low-Pass Filter signal before ZCM
+[b,a]=butter(10, 0.05);
+xLPF = filter(b,a,x);
+
+% Get shift ratio from ZCM
+freqContour(1) = 440;
+for (i = 2:(length(xLPF)/(1024/4)-10))
+	freqContour(i) = getFrequencyZCM(xLPF((i*1024/4):(i*1024/4+1023)),freqContour(i-1));
+endfor
 wantedContour = getClosestFreqContour(freqContour);
 shiftRatio = wantedContour./freqContour;
-shiftRatio = ones(1,length(shiftRatio))*1.1 .+ sin(2*pi*(1:length(shiftRatio))/2000)/2;
 
 % Get Sampling Points
 [samplePointsSTFT samplePointsX]  = getSamplePoints(shiftRatio,hop,windowSize); % CHECK n-1!!!
