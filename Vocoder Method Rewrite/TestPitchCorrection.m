@@ -52,10 +52,10 @@ pause;
 
 % Draw original spectrogram
 subplot(2,1,1);
-specgram(originalSample,analysisWindowSize,sf);
+specgramlog(originalSample,sf);
 title("Original Spectrogram");
 
 % Draw corrected spectrogram
 subplot(2,1,2);
-specgram(correctedSample,analysisWindowSize,sf);
+specgramlog(correctedSample,sf);
 title("Corrected Spectrogram");
