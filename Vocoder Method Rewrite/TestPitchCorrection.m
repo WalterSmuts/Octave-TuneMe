@@ -1,5 +1,5 @@
 % Define constants
-filename = input("Please enter the name of a file to correct it's pitch: ","s")
+filename = input("Please enter the name of a file to correct its pitch: ","s")
 if (isempty(filename))
 	filename = "singing.wav";
 endif
