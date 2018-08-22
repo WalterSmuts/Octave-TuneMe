@@ -13,6 +13,10 @@ correctedSample = getCorrectedPitch(originalSample, sf);
 originalFrequencyContour = getFrequencyContour(originalSample,analysisWindowSize,sf);
 correctedFrequencyContour = getFrequencyContour(correctedSample,analysisWindowSize,sf);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Draw draw waveforms vs frequency contours
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Draw original waveform
 subplot(2, 2, 1);
 plot((0:(length(originalSample)-1))/sf,originalSample);
@@ -40,3 +44,18 @@ plot((0:(length(correctedFrequencyContour)-1))/sf*analysisWindowSize,correctedFr
 title("Corrected Frequency Contour");
 xlabel("Time (seconds)");
 ylabel("Frequency");
+
+pause;
+%%%%%%%%%%%%%%%%%%%
+% Draw spectrograms
+%%%%%%%%%%%%%%%%%%%
+
+% Draw original spectrogram
+subplot(2,1,1);
+specgram(originalSample,analysisWindowSize,sf);
+title("Original Spectrogram");
+
+% Draw corrected spectrogram
+subplot(2,1,2);
+specgram(correctedSample,analysisWindowSize,sf);
+title("Corrected Spectrogram");
