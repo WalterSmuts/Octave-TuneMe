@@ -1,6 +1,6 @@
-function specgramlog(signal,sf)
+function specgramlog(signal,segmentSize,sf)
 	% Get spectrogram
-	[spec frequency time] = specgram(signal,4096,sf);
+	[spec frequency time] = specgram(signal,segmentSize,sf);
 	spec = 20*log10(abs(spec));
 
 	% Draw spectrogram

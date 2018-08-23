@@ -4,14 +4,14 @@ if (isempty(filename))
 	filename = "singing.wav";
 endif
 [originalSample sf] = audioread(filename);
-analysisWindowSize = 1024;
+segmentSize = 1024;
 
 % Apply pitch correction
-correctedSample = getCorrectedPitch(originalSample, sf);
+correctedSample = getCorrectedPitch(originalSample, sf,segmentSize);
 
 % Get frequency contours
-originalFrequencyContour = getFrequencyContour(originalSample,analysisWindowSize,sf);
-correctedFrequencyContour = getFrequencyContour(correctedSample,analysisWindowSize,sf);
+originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,sf);
+correctedFrequencyContour = getFrequencyContour(correctedSample,segmentSize,sf);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Draw draw waveforms vs frequency contours
@@ -33,14 +33,14 @@ ylabel("Amplitude");
 
 % Draw original frequency contour
 subplot(2, 2, 3);
-plot((0:(length(originalFrequencyContour)-1))/sf*analysisWindowSize,originalFrequencyContour);
+plot((0:(length(originalFrequencyContour)-1))/sf*segmentSize,originalFrequencyContour);
 title("Original Frequency Contour");
 xlabel("Time (seconds)");
 ylabel("Frequency");
 
 % Draw corrected frequency contour
 subplot(2, 2, 4);
-plot((0:(length(correctedFrequencyContour)-1))/sf*analysisWindowSize,correctedFrequencyContour);
+plot((0:(length(correctedFrequencyContour)-1))/sf*segmentSize,correctedFrequencyContour);
 title("Corrected Frequency Contour");
 xlabel("Time (seconds)");
 ylabel("Frequency");
@@ -52,10 +52,10 @@ pause;
 
 % Draw original spectrogram
 subplot(2,1,1);
-specgramlog(originalSample,sf);
+specgramlog(originalSample,segmentSize*4,sf);
 title("Original Spectrogram");
 
 % Draw corrected spectrogram
 subplot(2,1,2);
-specgramlog(correctedSample,sf);
+specgramlog(correctedSample,segmentSize*4,sf);
 title("Corrected Spectrogram");
