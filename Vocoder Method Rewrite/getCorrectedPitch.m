@@ -1,3 +1,3 @@
-function correctedPitch = getCorrectedPitch(original,sf)
+function correctedPitch = getCorrectedPitch(original,sf,segmentSize)
 	correctedPitch = original;
 endfunction
