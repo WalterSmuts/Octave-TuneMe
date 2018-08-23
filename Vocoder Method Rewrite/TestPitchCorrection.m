@@ -6,6 +6,9 @@ endif
 [originalSample sf] = audioread(filename);
 segmentSize = 1024;
 
+% Add zeros to complete final segment
+originalSample = addZeros(originalSample,segmentSize);
+
 % Apply pitch correction
 correctedSample = getCorrectedPitch(originalSample, sf,segmentSize);
 
