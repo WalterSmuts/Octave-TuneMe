@@ -19,7 +19,7 @@ segO = segment(originalSample,segmentSize);
 segF = segment(filteredSample,segmentSize);
 
 % Iterate over segment
-for (i = 1:columns(seg))
+for (i = 1:columns(segF))
 	% Calculate frequency of segment
 	s = segF(:,i);
 	con(i) = getFrequencyZCM(s,0,sf);
