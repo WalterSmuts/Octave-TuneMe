@@ -4,7 +4,7 @@ if (isempty(filename))
 	filename = "singing.wav";
 endif
 [originalSample sf] = audioread(filename);
-segmentSize = 1024;
+segmentSize = 2048;
 
 % Add zeros to complete final segment
 originalSample = addZeros(originalSample,segmentSize);
