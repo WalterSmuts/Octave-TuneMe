@@ -15,20 +15,18 @@ function c = pvsample(b, t, hop)
 % 2000-12-05 dpwe@ee.columbia.edu
 % $Header: /homes/dpwe/public_html/resources/matlab/dtw/../RCS/pvsample.m,v 1.3 2003/04/09 03:17:10 dpwe Exp $
 
+% Defaults and constants
 if nargin < 3
   hop = 0;
 end
-
 [rows,cols] = size(b);
-
 N = 2*(rows-1);
-
 if hop == 0
   % default value
   hop = N/2;
 end
 
-% Empty output array
+% Initialize array
 c = zeros(rows, length(t));
 
 % Expected phase advance in each bin

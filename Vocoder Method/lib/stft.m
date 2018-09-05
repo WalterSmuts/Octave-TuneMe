@@ -23,6 +23,7 @@ end
 
 s = length(x);
 
+% Add window
 if length(w) == 1
   if w == 0
     % special case: rectangular window
@@ -43,17 +44,18 @@ else
   win = w;
 end
 
+% Set default hop after window length is calculated
 w = length(win);
 % now can set default hop
 if h == 0
   h = floor(w/2);
 end
 
-c = 1;
-
 % pre-allocate output array
 d = zeros((1+f/2),1+fix((s-f)/h));
 
+% Apply stft
+c = 1;
 for b = 0:h:(s-f)
   u = win.*x((b+1):(b+f));
   t = fft(u);

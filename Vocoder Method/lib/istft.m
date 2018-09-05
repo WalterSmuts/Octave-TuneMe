@@ -12,16 +12,19 @@ function x = istft(d, ftsize, w, h)
 % dpwe 1994may24.  Uses built-in 'ifft' etc.
 % $Header: /home/empire6/dpwe/public_html/resources/matlab/pvoc/RCS/istft.m,v 1.5 2010/08/12 20:39:42 dpwe Exp $
 
+% Defaults
 if nargin < 2; ftsize = 2*(size(d,1)-1); end
 if nargin < 3; w = 0; end
 if nargin < 4; h = 0; end  % will become winlen/2 later
 
+% Exception for incorrect fft size
 s = size(d);
 if s(1) ~= (ftsize/2)+1
   error('number of rows should be fftsize/2+1')
 end
 cols = s(2);
- 
+
+% Creating the window...
 if length(w) == 1
   if w == 0
     % special case: rectangular window
@@ -44,15 +47,18 @@ else
   win = w;
 end
 
+% Set default window size and hop size
 w = length(win);
 % now can set default hop
 if h == 0 
   h = floor(w/2);
 end
 
+% Pre-allocate signal
 xlen = ftsize + (cols-1)*h;
 x = zeros(1,xlen);
 
+% Actually perform istft
 for b = 0:h:(h*(cols-1))
   ft = d(:,1+b/h)';
   ft = [ft, conj(ft([((ftsize/2)):-1:2]))];
