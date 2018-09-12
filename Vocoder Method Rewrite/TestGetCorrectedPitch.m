@@ -5,12 +5,13 @@ if (isempty(filename))
 endif
 [originalSample sf] = audioread(filename);
 segmentSize = 2048;
+hopSize = segmentSize/4;
 
 % Add zeros to complete final segment
-originalSample = addZeros(originalSample,segmentSize);
+originalSample = addZeros(originalSample,segmentSize,hopSize);
 
 % Apply pitch correction
-correctedSample = getCorrectedPitch(originalSample, sf,segmentSize);
+correctedSample = getCorrectedPitch(originalSample, segmentSize, sf);
 
 % Get frequency contours
 originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,sf);

@@ -1,7 +1,10 @@
-function out = addZeros(in,segmentSize)
-	r = rem(length(in),segmentSize);
-	add = segmentSize - r;
-	if (add == segmentSize)
+function out = addZeros(in,segmentSize,hopSize)
+	l = length(in);
+	while !(l<segmentSize)
+		l = l - hopSize;
+	endwhile
+	add = segmentSize - l;
+	if (add == hopSize)
 		out = in;
 	else
 		out = [in ; zeros(add,1)];

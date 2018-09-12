@@ -1,5 +1,9 @@
-function out = segment(input,segmentSize,hopsize)
-	for (i = 1:floor(length(input)/segmentSize))
-		out(:,i) = input(segmentSize*(i-1)+1:segmentSize*i);
-	endfor
+function out = segment(input,segmentSize,hopSize)
+	i=1;
+	j=1;
+	while ( j + segmentSize - 1 <= length(input) )
+		out(:,i) = input(j:(j+segmentSize-1));
+		i = i + 1;
+		j = j + hopSize;
+	endwhile
 endfunction
