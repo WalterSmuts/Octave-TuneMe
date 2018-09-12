@@ -11,11 +11,11 @@ hopSize = segmentSize/4;
 originalSample = addZeros(originalSample,segmentSize,hopSize);
 
 % Apply pitch correction
-correctedSample = getCorrectedPitch(originalSample, segmentSize, sf);
+correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf);
 
 % Get frequency contours
-originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,sf);
-correctedFrequencyContour = getFrequencyContour(correctedSample,segmentSize,sf);
+originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,hopSize,sf);
+correctedFrequencyContour = getFrequencyContour(correctedSample,segmentSize,hopSize,sf);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Draw draw waveforms vs frequency contours
@@ -37,14 +37,14 @@ ylabel("Amplitude");
 
 % Draw original frequency contour
 subplot(2, 2, 3);
-plot((0:(length(originalFrequencyContour)-1))/sf*segmentSize,originalFrequencyContour);
+plot((0:(length(originalFrequencyContour)-1))/sf*hopSize,originalFrequencyContour);
 title("Original Frequency Contour");
 xlabel("Time (seconds)");
 ylabel("Frequency");
 
 % Draw corrected frequency contour
 subplot(2, 2, 4);
-plot((0:(length(correctedFrequencyContour)-1))/sf*segmentSize,correctedFrequencyContour);
+plot((0:(length(correctedFrequencyContour)-1))/sf*hopSize,correctedFrequencyContour);
 title("Corrected Frequency Contour");
 xlabel("Time (seconds)");
 ylabel("Frequency");
@@ -56,10 +56,10 @@ pause;
 
 % Draw original spectrogram
 subplot(2,1,1);
-specgramlog(originalSample,segmentSize*4,sf);
+specgramlog(originalSample,segmentSize,sf);
 title("Original Spectrogram");
 
 % Draw corrected spectrogram
 subplot(2,1,2);
-specgramlog(correctedSample,segmentSize*4,sf);
+specgramlog(correctedSample,segmentSize,sf);
 title("Corrected Spectrogram");
