@@ -8,10 +8,15 @@ function freq = getFrequencyZCM(signal, prevFreq,sf)
 	% Calculate crossing points
 	zc = zerocrossing(1:length(signal),signal);
 
-	% If no crossings
-	if (length(zc) == 0)
+	% If fewer than 3
+	if (length(zc) < 3)
 		freq = prevFreq;
 		return;
+	endif
+
+	% Force odd zero crossing amount
+	if ( rem(length(zc),2) == 0 )
+		zc = zc(1:end-1);
 	endif
 
 	% Get considered length
