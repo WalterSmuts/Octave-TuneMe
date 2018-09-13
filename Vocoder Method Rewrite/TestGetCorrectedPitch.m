@@ -11,7 +11,7 @@ hopSize = segmentSize/4;
 originalSample = addZeros(originalSample,segmentSize,hopSize);
 
 % Apply pitch correction
-correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf);
+correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf)';
 
 % Get frequency contours
 originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,hopSize,sf);
@@ -30,7 +30,7 @@ ylabel("Amplitude");
 
 % Draw corrected waveform
 subplot(2, 2, 2);
-plot((0:(length(originalSample)-1))/sf,originalSample);
+plot((0:(length(correctedSample)-1))/sf,correctedSample);
 title("Corrected Waveform");
 xlabel("Time (seconds)");
 ylabel("Amplitude");

@@ -8,15 +8,15 @@ segmentSize = 2048;
 con = zeros(length(originalSample)/segmentSize,1);
 
 % Add zeros to complete final segment
-originalSample = addZeros(originalSample,segmentSize);
+originalSample = addZeros(originalSample,segmentSize,hopSize);
 
 % Pre-filter signal for ZCM: Assume: 20 < signal < 250Hz
 [b,a] = butter(8, 250/sf*2);
 filteredSample = filter(b,a,originalSample);
 
 % Segment sample
-segO = segment(originalSample,segmentSize);
-segF = segment(filteredSample,segmentSize);
+segO = segment(originalSample,segmentSize,hopSize);
+segF = segment(filteredSample,segmentSize,hopSize);
 
 % Iterate over segment
 for (i = 1:columns(segF))
