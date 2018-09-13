@@ -14,7 +14,7 @@ hopSize = segmentSize/4;
 originalSample = addZeros(originalSample,segmentSize,hopSize);
 
 % Apply pitch correction
-correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf)';
+correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf);
 
 % Get frequency contours
 originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,hopSize,sf);

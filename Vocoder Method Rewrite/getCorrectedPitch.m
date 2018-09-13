@@ -14,7 +14,7 @@ function correctedPitch = getCorrectedPitch(original,segmentSize,hopSize,sf)
 	newSpec = pvsample(spec,samplePointsSTFT,hopSize);
 
 	% Get the time stretched signal x
-	stretchedX = istft(newSpec,segmentSize,segmentSize,hopSize);
+	stretchedX = istft(newSpec,segmentSize,segmentSize,hopSize)';
 
 	% Interpolate to pitch shifted sample by arbitrary function
 	correctedPitch = interp1(stretchedX, [samplePointsX], 'spline');
