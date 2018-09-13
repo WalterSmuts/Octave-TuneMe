@@ -1,5 +1,5 @@
 % Define constants
-filename = input("Please enter the name of a file to correct its pitch: ","s")
+filename = input("Please enter the name of a file to correct its pitch: ","s");
 if (isempty(filename))
 	filename = "singing.wav";
 endif
@@ -50,9 +50,38 @@ xlabel("Time (seconds)");
 ylabel("Frequency");
 
 pause;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Draw contours on top of one another
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Draw original frequency contour
+subplot(1, 1, 1);
+plot((0:(length(originalFrequencyContour)-1))/sf*hopSize,originalFrequencyContour);
+title("Original Frequency Contour");
+xlabel("Time (seconds)");
+ylabel("Frequency");
+pause;
+
+% Draw wanted frequency contour on top of corrected contour
+hold on;
+plot((0:(length(originalFrequencyContour)-1))/sf*hopSize,getClosestFreqContour(originalFrequencyContour));
+title("Original Frequency Contour and Wanted Contour");
+legend("Original Frequency Contour","Wanted Contour");
+pause;
+
+% Draw corrected frequency contour on top of rest
+plot((0:(length(correctedFrequencyContour)-1))/sf*hopSize,correctedFrequencyContour);
+title("Original Frequency Contour, Wanted Contour and corrected contour");
+legend("Original Frequency Contour","Wanted Contour","Corrected Contour");
+
+hold off;
+pause;
 %%%%%%%%%%%%%%%%%%%
 % Draw spectrograms
 %%%%%%%%%%%%%%%%%%%
+
+% Suppress warnings
+warning('off');
 
 % Draw original spectrogram
 subplot(2,1,1);
