@@ -20,10 +20,14 @@ correctedSample = getCorrectedPitch(originalSample, segmentSize, hopSize, sf);
 originalFrequencyContour = getFrequencyContour(originalSample,segmentSize,hopSize,sf);
 correctedFrequencyContour = getFrequencyContour(correctedSample,segmentSize,hopSize,sf);
 
-% Get mean squared error metric (TODO: possibly scale to Max out of tune possible)
+% Metric to evaluate effectiveness of pitch correction
+% Mean squared error metric (TODO: possibly scale to Max out of tune possible)
 pkg load image;
 mseBefore = immse(ones(1,length(originalFrequencyContour)),originalFrequencyContour./getClosestFreqContour(originalFrequencyContour))*100^2
 mseAfter  = immse(ones(1,length(correctedFrequencyContour)),correctedFrequencyContour./getClosestFreqContour(correctedFrequencyContour))*100^2
+
+% Metric to evaluate noisiness of pitch correction
+similarityAfterDoubleApply = doubleApplyCorrMetric(originalSample,segmentSize,hopSize,sf)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Draw draw waveforms vs frequency contours
