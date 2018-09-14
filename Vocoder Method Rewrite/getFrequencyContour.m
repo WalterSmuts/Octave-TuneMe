@@ -7,10 +7,10 @@ function contour = getFrequencyContour(sample,segmentSize,hopSize,sf)
 	sample = segment(sample,segmentSize,hopSize);
 
 	% Pre populate array
-	contour = ones(1,length(sample)/segmentSize)*440;
+	contour = ones(1,length(sample)/segmentSize)*220;
 
 	% Get Frequency of each segment
-	prev = 440;
+	prev = 220;
 	for (i = 1:columns(sample))
 		contour(i) = getFrequencyZCM(sample(:,i),prev,sf);
 		prev = contour(i);
