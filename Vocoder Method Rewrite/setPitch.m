@@ -1,6 +1,4 @@
-function correctedPitch = setPitch(original,segmentSize,hopSize,sf,wantedPitchContour)
-	addpath("lib/");
-
+function scaledPitchSample = setPitch(original,segmentSize,hopSize,sf,wantedPitchContour)
 	% Get frequency contour
 	frequencyControur = getFrequencyContour(original, segmentSize, hopSize, sf);
 
@@ -14,21 +12,6 @@ function correctedPitch = setPitch(original,segmentSize,hopSize,sf,wantedPitchCo
 	% Get shift ratio contour
 	shiftRatioContour = wantedPitchContour./frequencyControur;
 
-	% Get STFT of original
-	spec = stft(original',segmentSize,segmentSize,hopSize);
-
-	% Get Sampling Points
-	[samplePointsSTFT samplePointsX]  = getSamplePoints(shiftRatioContour,hopSize,segmentSize); % CHECK n-1!!!
-
-	% Actually apply arbitrary re-sampling of STFT
-	newSpec = pvsample(spec,samplePointsSTFT,hopSize);
-
-	% Get the time stretched signal x
-	stretchedX = istft(newSpec,segmentSize,segmentSize,hopSize)';
-
-	% Interpolate to pitch shifted sample by arbitrary function
-	correctedPitch = interp1(stretchedX, [samplePointsX], 'spline');
-
-	% Remove any NAN values that creeps in
-	correctedPitch(isnan(correctedPitch)) = 0;
+	% Do pitch scaling
+	scaledPitchSample = getScaledSample(original,segmentSize,hopSize,sf,shiftRatioContour);
 endfunction
