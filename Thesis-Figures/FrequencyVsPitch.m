@@ -3,9 +3,9 @@ multiplier = 1.0594631;
 noteNumber = 24;
 notes = 55*multiplier.^(0:noteNumber)
 stem(0:(length(notes)-1),notes);
-xlabel("Pitch (Low to High)");
+xlabel("Pitch (LOW to HIGH)");
 ylabel("Frequency");
-set(gca,'XTick',0:2:noteNumber, 'fontsize', 22)
+set(gca,'XTick',0:2:noteNumber, 'fontsize', 20)
 set(gca, 'xtickLabel', {
 			'A',
 			'B',
