@@ -8,6 +8,7 @@ scatter(0:(length(notes)-1),notes,150,"r",'+');
 hold on;
 scatter(0:(length(notesB)-1),notesB,150,"b",'x');
 hold off;
+grid
 xlabel("Pitch (low to high)");
 ylabel("Interval Ratio");
 title("Equal vs Just Interval Ratio")
@@ -27,7 +28,9 @@ set(gca, 'xtickLabel', {
 			'G#'
 })
 print -dpng 'EqualVsJust.png'
+
 stem(0:(length(notesB)-1),(notesB.-notes)*100)
+grid
 xlabel("Pitch (low to high)");
 ylabel("Error as %");
 title("Error of Equal Tempered Tuning")

@@ -2,6 +2,7 @@ multiplier = 1.0594631;
 noteNumber = 24;
 notes = 440*multiplier.^(0:noteNumber)
 stem(0:(length(notes)-1),notes);
+grid
 xlabel("Pitch (low to high)");
 ylabel("Frequency");
 set(gca,'XTick',0:2:noteNumber, 'fontsize', 20)
