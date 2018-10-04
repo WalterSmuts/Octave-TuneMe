@@ -9,6 +9,8 @@ hold on;
 scatter(0:(length(notesB)-1),notesB,150,"b",'x');
 hold off;
 grid
+h = legend("Equal Tuning                ","Just Tuning","location","northwest");
+set (h, "fontsize", 20);
 xlabel("Pitch (low to high)");
 ylabel("Interval Ratio");
 title("Equal vs Just Interval Ratio")
