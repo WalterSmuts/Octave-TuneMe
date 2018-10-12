@@ -14,8 +14,9 @@ hold off
 title("Individual");
 xlabel("Time");
 ylabel("Amplitude");
-set(gca,'XTick', [], 'YTick', [], 'fontsize', 30)
+set(gca,'XTick', [], 'YTick', [0], 'fontsize', 30)
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 15 5])
+grid;
 print -dpng 'HarmonyOctaveSeparate'
 
 plot(t,x,"linewidth", 2);
@@ -26,8 +27,9 @@ hold off;
 title("Superposition");
 xlabel("Time");
 ylabel("Amplitude");
-set(gca,'XTick', [], 'YTick', [], 'fontsize', 30)
+set(gca,'XTick', [], 'YTick', [0], 'fontsize', 30)
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 15 5])
+grid;
 print -dpng 'HarmonyOctaveSuper.png'
 
 plot(t,y1,"linewidth", 2);
@@ -37,8 +39,9 @@ hold off;
 title("Individual");
 xlabel("Time");
 ylabel("Amplitude");
-set(gca,'XTick', [], 'YTick', [], 'fontsize',30)
+set(gca,'XTick', [], 'YTick', [0], 'fontsize', 30)
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 15 5])
+grid;
 print -dpng 'HarmonyFifthSeparate'
 
 plot(t,y,"linewidth", 2);
@@ -49,6 +52,7 @@ hold off;
 title("Superposition");
 xlabel("Time");
 ylabel("Amplitude");
-set(gca,'XTick', [], 'YTick', [], 'fontsize', 30)
+set(gca,'XTick', [], 'YTick', [0], 'fontsize', 30)
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 15 5])
+grid;
 print -dpng 'HarmonyFifthSuper.png'
