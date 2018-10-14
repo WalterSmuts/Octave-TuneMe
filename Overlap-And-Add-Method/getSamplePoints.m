@@ -9,7 +9,7 @@ function [samplePointsSTFT samplePointsX] = getSamplePoints(shiftRatio,hop,windo
 
 		% Fill sample points in STFT space until next shift ratio is reached
 		while (samplePointsSTFT(pointerOut) < i-1)
-			samplePointsSTFT(pointerOut+1) = samplePointsSTFT(pointerOut) + 1/shiftRatio(i);
+			samplePointsSTFT(pointerOut+1) = samplePointsSTFT(pointerOut) + 0.5/shiftRatio(i);
 
 			% Add sample points in time domain every 2nd STFT point !!!50% overlap assumed!!!
 			if (rem(pointerOut,2)==0)
