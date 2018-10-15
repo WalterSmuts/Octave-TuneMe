@@ -1,8 +1,4 @@
 function scaledSample = getScaledSample(original,segmentSize,hopSize,sf,shiftRatioContour)
-	% Test shift contour values
-	shiftRatioContour = ones(1,length(original)/segmentSize);
-	shiftRatioContour = shiftRatioContour + 0.5*sin((1:length(shiftRatioContour))*2*pi/40);
-
 	% Get Sampling Points
 	[windowStartPoints samplePointsX]  = getSamplePoints(shiftRatioContour,hopSize,segmentSize);
 
