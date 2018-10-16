@@ -5,16 +5,14 @@ t = 0:1/sf:5;
 k = (2)^(1/5);
 x = sin(2*pi*110*(k.^t-1)/log(k));
 c = getFrequencyContour(x,2048,1024,sf);
-d = getClosestFreqContour(c);
+c(1) = 110;
+d = getClosestFreqContour(c)
 clog = log2(c);
 dlog = log2(d);
 plot(linspace(0,5,length(c)),clog);
 hold on;
 plot(linspace(0,5,length(c)),dlog);
 hold off;
-
-ylabel("Pitch");
-xlabel("Time [seconds]");
 
 set(gca, 'ytickLabel', {
 			'A',
@@ -30,8 +28,11 @@ set(gca, 'ytickLabel', {
 			'G'
 			'G#'
 })
-set(gca,'YTick', log2(55):0.08333:log2(440))
 
+xlabel("Time          ");
+ylabel("Pitch");
+set(gca,'XTick', 0:8, 'fontsize', 12)
+set(gcf,'PaperUnits','centimeters','PaperPosition',[0 0 30 8])
 grid;
-set(gca,'fontsize', 20);
-legend("Original Pitch Contour","Wanted Pitch Contour","location","northwest");
+set(gca,'YTick', log2(55):0.08333:log2(440))
+print -dpng 'ChirpContour.png'
