@@ -7,8 +7,6 @@ function scaledSample = getScaledSample(original,segmentSize,hopSize,sf,shiftRat
 
 	% Get the time stretched signal x
 	stretchedX = overlapAndAdd(sampledSegments);
-	length(original)
-	length(stretchedX)
 
 	% Interpolate to pitch shifted sample by arbitrary function
 	scaledSample = interp1(stretchedX, [samplePointsX], 'spline');
