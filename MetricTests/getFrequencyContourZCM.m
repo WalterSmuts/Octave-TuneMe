@@ -1,4 +1,4 @@
-function contour = getFrequencyContour(sample,segmentSize,hopSize,sf)
+function contour = getFrequencyContourZCM(sample,segmentSize,hopSize,sf)
 	% Pre-filter signal for ZCM: Assume: 20 < signal < 250Hz
 	[b,a] = butter(8, 250/sf*2);
 	sample = filter(b,a,sample);

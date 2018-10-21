@@ -4,7 +4,7 @@ t = 0:1/sf:5;
 
 k = (2)^(1/10);
 x = sin(2*pi*110*(k.^t-1)/log(k));
-c = getFrequencyContourZCM(x,2048,1024,sf);
+c = getFrequencyContourAutoCorr(x,2048,1024,sf);
 c(1) = 110;
 d = c;
 groundTruth = log2(c);
@@ -12,7 +12,7 @@ groundTruth = log2(c);
 for (i = 1:200)
 	i
 	noise = i/100*rand(1,length(x));
-	it = getFrequencyContourZCM(x+noise,2048,1024,sf);
+	it = getFrequencyContourAutoCorr(x+noise,2048,1024,sf);
 	it(1) = 110;
 	it = log2(it);
 	logNoise(i) = 10*log10(i/100);
@@ -30,4 +30,4 @@ axis([min(logNoise) max(logNoise)]);
 
 set(gca,'fontsize', 12)
 set(gcf,'PaperUnits','centimeters','PaperPosition',[0 0 30 8])
-print -dpng 'NoiseRobustnessZCM.png'
+print -dpng 'NoiseRobustnessAutoCorr.png'
